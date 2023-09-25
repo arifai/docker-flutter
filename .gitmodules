@@ -1,0 +1,3 @@
+[submodule "docker-android-sdk"]
+	path = docker-android-sdk
+	url = git@github.com:arifai/docker-android-sdk.git
