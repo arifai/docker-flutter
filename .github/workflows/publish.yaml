@@ -2,7 +2,7 @@ name: Publish Registry to ghcr.io
 
 env:
   DOCKER_TAG: ghcr.io/arifai/flutter
-  FLUTTER_VERSION: 3.13.5-stable
+  FLUTTER_VERSION: 3.13.5
 
 on:
   push:
@@ -30,5 +30,5 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build ${{ github.repository }} and push to ghcr.io
         run: |
-          docker build -t $DOCKER_TAG:stable --build-arg FLUTTER_VERSION=$FLUTTER_VERSION -f sdk/Dockerfile .
-          docker push $DOCKER_TAG:stable
+          docker build -t $DOCKER_TAG:stable $DOCKER_TAG:$FLUTTER_VERSION $DOCKER_TAG:latest --build-arg FLUTTER_VERSION=$FLUTTER_VERSION-stable -f sdk/Dockerfile .
+          docker push $DOCKER_TAG --all-tags
