@@ -7,7 +7,10 @@ LABEL org.opencontainers.image.licenses MIT
 ARG FLUTTER_VERSION 3.13.5-stable
 
 ENV ANDROID_USER android
-ENV PATH "$PATH:/$ANDROID_USER/flutter/bin"
+ENV JAVA_HOME /usr/lib/jvm/java-21-openjdk
+ENV PATH "$PATH:/$ANDROID_USER/flutter/bin:$JAVA_HOME/bin"
+
+RUN set -eux; export JAVA_HOME=${JAVA_HOME}
 
 RUN set -eux; addgroup -S ${ANDROID_USER} \ 
   && adduser \
@@ -24,6 +27,7 @@ RUN set -eux; chown -R ${ANDROID_USER}:${ANDROID_USER} ${ANDROID_USER}
 
 USER ${ANDROID_USER}
 
-RUN set -eux; yes | flutter doctor --android-licenses \
+RUN set -eux; java -version \
+  && yes | flutter doctor --android-licenses \
   && flutter config --no-analytics \
-  && flutter doctor
+  && flutter doctor -v
