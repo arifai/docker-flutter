@@ -6,26 +6,23 @@ LABEL org.opencontainers.image.licenses MIT
 
 ARG FLUTTER_VERSION
 
-ENV FLUTTER_USER flutter
+ENV ANDROID_USER android
+ENV PATH "$PATH:/$ANDROID_USER/flutter/bin"
 
-RUN addgroup -S ${FLUTTER_USER} \ 
+RUN addgroup -S ${ANDROID_USER} \ 
   && adduser \
-  -S ${FLUTTER_USER} \
-  -G ${FLUTTER_USER} \
-  -D -H
+  -h ${ANDROID_USER} \
+  -S ${ANDROID_USER} \
+  -G ${ANDROID_USER} -D
 
-ENV FLUTTER_HOME ${HOME}/Flutter/Sdk
-ENV PATH "$PATH:$FLUTTER_HOME/flutter/bin"
-
-RUN git config --global --add safe.directory ${FLUTTER_HOME}/flutter \
-  && mkdir -p ${FLUTTER_HOME} \
-  && wget -q https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_${FLUTTER_VERSION}.tar.xz \
+RUN wget -q https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_${FLUTTER_VERSION}.tar.xz \
   && tar xf flutter_linux_${FLUTTER_VERSION}.tar.xz \
   && rm flutter_linux_${FLUTTER_VERSION}.tar.xz \
-  && mv flutter ${FLUTTER_HOME} \
-  && rm -rf ${FLUTTER_HOME}/flutter/bin/cache
+  && mv flutter ${ANDROID_USER}
 
-RUN chown ${FLUTTER_USER}:${FLUTTER_USER} ${FLUTTER_HOME}
+RUN chown -R ${ANDROID_USER}:${ANDROID_USER} ${ANDROID_USER}
+
+USER ${ANDROID_USER}
 
 RUN yes | flutter doctor --android-licenses \
   && flutter doctor
