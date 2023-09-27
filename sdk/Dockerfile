@@ -1,7 +1,7 @@
 FROM ghcr.io/arifai/android-sdk:latest
 
 LABEL org.opencontainers.image.source https://github.com/arifai/docker-flutter
-LABEL org.opencontainers.image.description Docker Image for Flutter on Alpine Linux
+LABEL org.opencontainers.image.description Flutter Docker image on Alpine Linux
 LABEL org.opencontainers.image.licenses MIT
 
 ARG FLUTTER_VERSION 3.13.5-stable
