@@ -9,7 +9,7 @@ LABEL org.opencontainers.image.description Flutter Docker image on Ubuntu Linux
 LABEL org.opencontainers.image.licenses MIT
 
 ENV ANDROID_USER android
-ENV CONFIG_DIR /home/${ANDROID_USER}/.config
+ENV ANDROID_DIR /home/${ANDROID_USER}
 ENV SDK_ROOT /home/app/sdks
 ENV PATH "$PATH:$SDK_ROOT/flutter/bin"
 
@@ -21,8 +21,10 @@ RUN set -eux; groupadd -r ${ANDROID_USER} \
 RUN set -eux; wget -q https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_${FLUTTER_VERSION}.tar.xz \
   && tar xf flutter_linux_${FLUTTER_VERSION}.tar.xz \
   && rm flutter_linux_${FLUTTER_VERSION}.tar.xz \
-  && mkdir -p ${CONFIG_DIR}/flutter \
-  && chown -R ${ANDROID_USER}:${ANDROID_USER} ${CONFIG_DIR}/flutter \
+  && mkdir -p ${ANDROID_DIR}/.config/flutter \
+  && mkdir -p ${ANDROID_DIR}/.dart-tool \
+  && chown -R ${ANDROID_USER}:${ANDROID_USER} ${ANDROID_DIR}/.config/flutter \
+  && chown -R ${ANDROID_USER}:${ANDROID_USER} ${ANDROID_DIR}/.dart-tool \
   && chown -R ${ANDROID_USER}:${ANDROID_USER} ${SDK_ROOT}
 
 USER ${ANDROID_USER}
