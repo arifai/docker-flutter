@@ -10,10 +10,9 @@ LABEL org.opencontainers.image.licenses MIT
 
 ENV ANDROID_USER android
 ENV ANDROID_DIR /home/${ANDROID_USER}
-ENV SDK_ROOT /home/app/sdks
-ENV PATH "$PATH:$SDK_ROOT/flutter/bin"
+ENV PATH "$PATH:$ANDROID_DIR/flutter/bin"
 
-WORKDIR ${SDK_ROOT}
+WORKDIR ${ANDROID_DIR}
 
 RUN set -eux; groupadd -r ${ANDROID_USER} \
   && useradd -r -g ${ANDROID_USER} ${ANDROID_USER}
@@ -21,11 +20,7 @@ RUN set -eux; groupadd -r ${ANDROID_USER} \
 RUN set -eux; wget -q https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_${FLUTTER_VERSION}.tar.xz \
   && tar xf flutter_linux_${FLUTTER_VERSION}.tar.xz \
   && rm flutter_linux_${FLUTTER_VERSION}.tar.xz \
-  && mkdir -p ${ANDROID_DIR}/.config/flutter \
-  && mkdir -p ${ANDROID_DIR}/.dart-tool \
-  && chown -R ${ANDROID_USER}:${ANDROID_USER} ${ANDROID_DIR}/.config/flutter \
-  && chown -R ${ANDROID_USER}:${ANDROID_USER} ${ANDROID_DIR}/.dart-tool \
-  && chown -R ${ANDROID_USER}:${ANDROID_USER} ${SDK_ROOT}
+  && chown -R ${ANDROID_USER}:${ANDROID_USER} ${ANDROID_DIR}
 
 USER ${ANDROID_USER}
 
