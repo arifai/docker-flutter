@@ -17,9 +17,9 @@ WORKDIR ${ANDROID_DIR}
 RUN set -eux; groupadd -r ${ANDROID_USER} \
   && useradd -r -g ${ANDROID_USER} ${ANDROID_USER}
 
-RUN set -eux; wget -q https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_${FLUTTER_VERSION}.tar.xz \
-  && tar xf flutter_linux_${FLUTTER_VERSION}.tar.xz \
-  && rm flutter_linux_${FLUTTER_VERSION}.tar.xz \
+RUN set -eux; curl https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_${FLUTTER_VERSION}.tar.xz -o flutter.tar.xz \
+  && tar xf flutter.tar.xz \
+  && rm flutter.tar.xz \
   && chown -R ${ANDROID_USER}:${ANDROID_USER} ${ANDROID_DIR}
 
 USER ${ANDROID_USER}
