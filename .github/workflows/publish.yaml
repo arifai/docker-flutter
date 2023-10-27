@@ -2,7 +2,7 @@ name: Publish Registry to ghcr.io
 
 env:
   DOCKER_TAG: ghcr.io/arifai/flutter
-  VERSION: 3.13.8
+  VERSION: 3.13.9
 
 on:
   push:
