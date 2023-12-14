@@ -1,6 +1,7 @@
 FROM ghcr.io/arifai/android-sdk:latest
 
 ARG FLUTTER_VERSION
+ARG FLUTTER_CHANNEL
 
 LABEL io.github.arifai.image.souce https://github.com/arifai/docker-flutter
 LABEL io.github.arifai.image.version ${FLUTTER_VERSION}
@@ -17,7 +18,7 @@ WORKDIR ${ANDROID_DIR}
 RUN set -eux; groupadd -r ${ANDROID_USER} \
   && useradd -r -g ${ANDROID_USER} ${ANDROID_USER}
 
-RUN set -eux; curl https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_${FLUTTER_VERSION}.tar.xz -o flutter.tar.xz \
+RUN set -eux; curl https://storage.googleapis.com/flutter_infra_release/releases/${FLUTTER_CHANNEL}/linux/flutter_linux_${FLUTTER_VERSION}.tar.xz -o flutter.tar.xz \
   && tar xf flutter.tar.xz \
   && rm flutter.tar.xz \
   && chown -R ${ANDROID_USER}:${ANDROID_USER} ${ANDROID_DIR}
