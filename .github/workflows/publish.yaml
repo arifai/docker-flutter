@@ -4,10 +4,6 @@ env:
   DOCKER_TAG: ghcr.io/arifai/flutter
 
 on:
-  push:
-    branches:
-      - main
-      
   workflow_dispatch:
     inputs:
       version:
@@ -19,7 +15,7 @@ on:
         description: 'Flutter channel is only available Stable and Beta. Reference: https://docs.flutter.dev/release/archive?tab=linux'
         options:
           - stable
-          - beta
+          - beta  
 
 jobs:
   flutter:
