@@ -19,11 +19,13 @@ RUN set -eux; groupadd -r ${ANDROID_USER} \
   && useradd -r -g ${ANDROID_USER} ${ANDROID_USER}
 
 RUN set -eux; apt-get update && apt-get upgrade -y \ 
-  && apt-get install clang cmake ninja-build pkg-config -y --no-install-recommends \
+  && apt-get install clang cmake ninja-build pkg-config libgtk-3-dev -y --no-install-recommends \
   && curl https://storage.googleapis.com/flutter_infra_release/releases/${FLUTTER_CHANNEL}/linux/flutter_linux_${FLUTTER_VERSION}.tar.xz -o flutter.tar.xz \
   && tar xf flutter.tar.xz \
   && rm flutter.tar.xz \
-  && chown -R ${ANDROID_USER}:${ANDROID_USER} ${ANDROID_DIR}
+  && chown -R ${ANDROID_USER}:${ANDROID_USER} ${ANDROID_DIR} \
+  && apt-get autoremove \
+  && apt-get autoclean
 
 USER ${ANDROID_USER}
 
