@@ -4,7 +4,7 @@ ARG FLUTTER_VERSION
 ARG FLUTTER_CHANNEL
 
 LABEL io.github.arifai.image.souce https://github.com/arifai/docker-flutter
-LABEL io.github.arifai.image.version ${FLUTTER_VERSION}-${FLUTTER_CHANNEL}
+LABEL io.github.arifai.image.version ${FLUTTER_VERSION}
 LABEL org.opencontainers.image.source https://github.com/arifai/docker-flutter
 LABEL org.opencontainers.image.description Flutter Docker image on Ubuntu Linux
 LABEL org.opencontainers.image.licenses MIT
