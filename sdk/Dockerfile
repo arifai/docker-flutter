@@ -11,7 +11,7 @@ LABEL org.opencontainers.image.licenses MIT
 
 ENV DOCKER_USER android
 
-ARG FLUTTER_DIR /home/${DOCKER_USER}
+ARG FLUTTER_DIR "/home/${DOCKER_USER}"
 
 ENV PATH "$PATH:$FLUTTER_DIR/flutter/bin"
 
