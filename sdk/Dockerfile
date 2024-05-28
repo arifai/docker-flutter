@@ -32,3 +32,5 @@ USER ${ANDROID_USER}
 RUN set -eux; yes | flutter doctor --android-licenses \
   && flutter config --no-analytics \
   && flutter doctor -v
+
+CMD ["flutter"]
