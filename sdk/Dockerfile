@@ -9,10 +9,8 @@ LABEL org.opencontainers.image.source https://github.com/arifai/docker-flutter
 LABEL org.opencontainers.image.description Flutter Docker image on Ubuntu Linux
 LABEL org.opencontainers.image.licenses MIT
 
-ENV DOCKER_USER android
-
-ARG FLUTTER_DIR=/home/${DOCKER_USER}
-
+ENV DOCKER_USER root
+ENV FLUTTER_DIR /home/${DOCKER_USER}
 ENV PATH "$PATH:$FLUTTER_DIR/flutter/bin"
 
 WORKDIR ${FLUTTER_DIR}
