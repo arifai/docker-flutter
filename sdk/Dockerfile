@@ -15,8 +15,8 @@ ENV PATH "$PATH:$FLUTTER_DIR/flutter/bin"
 
 WORKDIR ${FLUTTER_DIR}
 
-RUN set -eux; groupadd -r ${DOCKER_USER} \
-  && useradd -r -g ${DOCKER_USER} ${DOCKER_USER}
+# RUN set -eux; groupadd -r ${DOCKER_USER} \
+#   && useradd -r -g ${DOCKER_USER} ${DOCKER_USER}
 
 RUN set -eux; apt-get update && apt-get upgrade -y \ 
   && apt-get install clang cmake ninja-build pkg-config libgtk-3-dev -y --no-install-recommends \
